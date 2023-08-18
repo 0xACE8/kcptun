@@ -56,7 +56,7 @@ define Package/kcptun/Default
   endef
 endef
 
-KCPTUN_COMPONENTS:=client server
+KCPTUN_COMPONENTS:=client
 
 $(foreach component,$(KCPTUN_COMPONENTS), \
   $(eval $(call Package/kcptun/Default,$(component))) \
