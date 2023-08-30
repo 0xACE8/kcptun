@@ -1,15 +1,18 @@
-# SPDX-License-Identifier: MIT
 #
-# Copyright (c) 2023 0xACE7
+# Copyright (C) 2019-2020 Xingwang Liao
+#
+# This is free software, licensed under the GNU General Public License v2.
+# See /LICENSE for more information.
+#
 
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=kcptun
 PKG_VERSION:=20230811
-PKG_RELEASE:=$(AUTORELEASE)
+PKG_RELEASE:=1
 
-PKG_SOURCE:=kcptun-$(PKG_VERSION).tar.gz
-PKG_SOURCE_URL:=https://codeload.github.com/xtaci/kcptun/tar.gz/v${PKG_VERSION}?
+PKG_SOURCE:=$(PKG_NAME)-$(PKG_VERSION).tar.gz
+PKG_SOURCE_URL:=https://codeload.github.com/xtaci/kcptun/tar.gz/v$(PKG_VERSION)?
 PKG_HASH:=dd88c7ddb85cc74ff22940ba2dc22f65d3b6737153b225d611abb801a0694c4d
 
 PKG_LICENSE:=MIT
@@ -33,6 +36,7 @@ define Package/kcptun/Default
   define Package/kcptun-$(1)
     SECTION:=net
     CATEGORY:=Network
+    SUBMENU:=Web Servers/Proxies
     DEPENDS:=$$(GO_ARCH_DEPENDS)
     TITLE:=Simple UDP Tunnel Based On KCP ($1)
     URL:=https://github.com/xtaci/kcptun
@@ -45,10 +49,10 @@ define Package/kcptun/Default
   endef
 
   define Package/kcptun-$(1)/install
-  $$(call GoPackage/Package/Install/Bin,$$(PKG_INSTALL_DIR))
+	$$(call GoPackage/Package/Install/Bin,$$(PKG_INSTALL_DIR))
 
-  $$(INSTALL_DIR) $$(1)/usr/bin
-  $$(INSTALL_BIN) $$(PKG_INSTALL_DIR)/usr/bin/$(1) $$(1)/usr/bin/kcptun
+	$$(INSTALL_DIR) $$(1)/usr/bin
+	$$(INSTALL_BIN) $$(PKG_INSTALL_DIR)/usr/bin/$(1) $$(1)/usr/bin/kcptun-$(1)
   endef
 endef
 
